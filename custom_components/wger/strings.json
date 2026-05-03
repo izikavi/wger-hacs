@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to wger",
+        "description": "Enter the URL of the wger instance and your personal API key. For wger.de use https://wger.de.",
+        "data": {
+          "url": "Server URL",
+          "api_key": "API key",
+          "verify_ssl": "Verify SSL certificate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid API key",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This wger instance is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "latest_weight": { "name": "Latest weight" },
+      "workout_count": { "name": "Workouts" },
+      "session_count": { "name": "Workout sessions" },
+      "latest_session": { "name": "Last session" },
+      "nutrition_plans": { "name": "Nutrition plans" }
+    }
+  }
+}
