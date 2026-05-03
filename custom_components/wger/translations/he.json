@@ -1,0 +1,32 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "התחברות ל-wger",
+        "description": "הזן את כתובת שרת ה-wger ואת מפתח ה-API האישי שלך. עבור wger.de השתמש ב-https://wger.de.",
+        "data": {
+          "url": "כתובת השרת",
+          "api_key": "מפתח API",
+          "verify_ssl": "אמת תעודת SSL"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "ההתחברות נכשלה",
+      "invalid_auth": "מפתח API שגוי",
+      "unknown": "שגיאה לא צפויה"
+    },
+    "abort": {
+      "already_configured": "מופע wger זה כבר מוגדר."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "latest_weight": { "name": "משקל אחרון" },
+      "workout_count": { "name": "אימונים" },
+      "session_count": { "name": "מפגשי אימון" },
+      "latest_session": { "name": "מפגש אחרון" },
+      "nutrition_plans": { "name": "תוכניות תזונה" }
+    }
+  }
+}
