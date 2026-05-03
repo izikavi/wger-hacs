@@ -26,7 +26,12 @@
       "workout_count": { "name": "אימונים" },
       "session_count": { "name": "מפגשי אימון" },
       "latest_session": { "name": "מפגש אחרון" },
-      "nutrition_plans": { "name": "תוכניות תזונה" }
+      "nutrition_plans": { "name": "תוכניות תזונה" },
+      "bmi": { "name": "BMI" },
+      "body_fat": { "name": "אחוז שומן" },
+      "weight_delta_last": { "name": "שינוי משקל (מהפעם הקודמת)" },
+      "weight_delta_30d": { "name": "שינוי משקל (30 ימים)" },
+      "pr_max_weight": { "name": "שיא אישי (משקל מרבי)" }
     }
   }
 }

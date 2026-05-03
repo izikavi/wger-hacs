@@ -61,6 +61,50 @@ def _latest_session_attrs(data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _body_fat_value(data: dict[str, Any]) -> float | None:
+    entry = data.get("body_fat")
+    if not entry:
+        return None
+    try:
+        return float(entry.get("value"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _body_fat_attrs(data: dict[str, Any]) -> dict[str, Any]:
+    entry = data.get("body_fat") or {}
+    return {"date": entry.get("date"), "notes": entry.get("notes")}
+
+
+def _delta_last_attrs(data: dict[str, Any]) -> dict[str, Any]:
+    return {"compared_to": data.get("weight_delta_last_from_date")}
+
+
+def _delta_30d_attrs(data: dict[str, Any]) -> dict[str, Any]:
+    return {"compared_to": data.get("weight_delta_30d_from_date")}
+
+
+def _pr_value(data: dict[str, Any]) -> float | None:
+    entry = data.get("top_log")
+    if not entry:
+        return None
+    try:
+        return float(entry.get("weight"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _pr_attrs(data: dict[str, Any]) -> dict[str, Any]:
+    entry = data.get("top_log") or {}
+    return {
+        "exercise_base": entry.get("exercise_base"),
+        "exercise": entry.get("exercise"),
+        "reps": entry.get("reps"),
+        "date": entry.get("date"),
+        "workout": entry.get("workout"),
+    }
+
+
 SENSORS: tuple[WgerSensorEntityDescription, ...] = (
     WgerSensorEntityDescription(
         key="latest_weight",
@@ -105,6 +149,59 @@ SENSORS: tuple[WgerSensorEntityDescription, ...] = (
         icon="mdi:food-apple",
         state_class=SensorStateClass.TOTAL,
         value_fn=lambda data: len(data.get("nutrition_plans") or []),
+    ),
+    WgerSensorEntityDescription(
+        key="bmi",
+        translation_key="bmi",
+        name="BMI",
+        icon="mdi:human",
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
+        value_fn=lambda data: data.get("bmi"),
+    ),
+    WgerSensorEntityDescription(
+        key="body_fat",
+        translation_key="body_fat",
+        name="Body Fat",
+        icon="mdi:percent",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="%",
+        suggested_display_precision=1,
+        value_fn=_body_fat_value,
+        attrs_fn=_body_fat_attrs,
+    ),
+    WgerSensorEntityDescription(
+        key="weight_delta_last",
+        translation_key="weight_delta_last",
+        name="Weight Change (vs previous)",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfMass.KILOGRAMS,
+        suggested_display_precision=2,
+        value_fn=lambda data: data.get("weight_delta_last"),
+        attrs_fn=_delta_last_attrs,
+    ),
+    WgerSensorEntityDescription(
+        key="weight_delta_30d",
+        translation_key="weight_delta_30d",
+        name="Weight Change (30 days)",
+        icon="mdi:chart-line-variant",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfMass.KILOGRAMS,
+        suggested_display_precision=2,
+        value_fn=lambda data: data.get("weight_delta_30d"),
+        attrs_fn=_delta_30d_attrs,
+    ),
+    WgerSensorEntityDescription(
+        key="pr_max_weight",
+        translation_key="pr_max_weight",
+        name="Personal Record (max weight)",
+        icon="mdi:trophy",
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement=UnitOfMass.KILOGRAMS,
+        suggested_display_precision=2,
+        value_fn=_pr_value,
+        attrs_fn=_pr_attrs,
     ),
 )
 

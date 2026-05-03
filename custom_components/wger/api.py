@@ -69,6 +69,35 @@ class WgerClient:
         results = data.get("results") or []
         return results[0] if results else None
 
+    async def async_get_weight_history(self, limit: int = 200) -> list[dict[str, Any]]:
+        """Return recent weight entries, newest first."""
+        data = await self._get(
+            "weightentry/", params={"ordering": "-date", "limit": limit}
+        )
+        return data.get("results") or []
+
+    async def async_get_measurement_categories(self) -> list[dict[str, Any]]:
+        data = await self._get("measurement-category/", params={"limit": 100})
+        return data.get("results") or []
+
+    async def async_get_latest_measurement(
+        self, category_id: int
+    ) -> dict[str, Any] | None:
+        data = await self._get(
+            "measurement/",
+            params={"category": category_id, "ordering": "-date", "limit": 1},
+        )
+        results = data.get("results") or []
+        return results[0] if results else None
+
+    async def async_get_top_workout_log(self) -> dict[str, Any] | None:
+        """Return the single workoutlog entry with the heaviest weight."""
+        data = await self._get(
+            "workoutlog/", params={"ordering": "-weight", "limit": 1}
+        )
+        results = data.get("results") or []
+        return results[0] if results else None
+
     async def async_get_workout_count(self) -> int:
         data = await self._get("workout/", params={"limit": 1})
         return int(data.get("count", 0))

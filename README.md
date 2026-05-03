@@ -20,6 +20,15 @@ public `wger.de` instance and self-hosted deployments.
 | `sensor.wger_workout_sessions` | Total number of logged workout sessions |
 | `sensor.wger_last_session` | Date of the most recent workout session |
 | `sensor.wger_nutrition_plans` | Number of nutrition plans on the account |
+| `sensor.wger_bmi` | BMI computed from latest weight + profile height |
+| `sensor.wger_body_fat` | Latest body-fat measurement (%) |
+| `sensor.wger_weight_change_vs_previous` | Δ kg between the two most recent weight entries |
+| `sensor.wger_weight_change_30_days` | Δ kg vs the entry closest to ~30 days ago |
+| `sensor.wger_personal_record_max_weight` | Heaviest weight ever logged in `workoutlog` |
+
+> Body fat is read from the wger **measurement category** whose name contains
+> "fat" / "אחוז שומן". Create one in wger and start logging values for the
+> sensor to populate.
 
 ## Installation (HACS)
 

@@ -26,7 +26,12 @@
       "workout_count": { "name": "Workouts" },
       "session_count": { "name": "Workout sessions" },
       "latest_session": { "name": "Last session" },
-      "nutrition_plans": { "name": "Nutrition plans" }
+      "nutrition_plans": { "name": "Nutrition plans" },
+      "bmi": { "name": "BMI" },
+      "body_fat": { "name": "Body fat" },
+      "weight_delta_last": { "name": "Weight change (vs previous)" },
+      "weight_delta_30d": { "name": "Weight change (30 days)" },
+      "pr_max_weight": { "name": "Personal record (max weight)" }
     }
   }
 }
